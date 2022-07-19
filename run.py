@@ -36,9 +36,10 @@ HANGMAN = ['''
     /|\   |
     / \   |
          === ''']
-game_word = 'brilliant'
-incorrect_guesses = 'qzxc'
-correct_guesses = 'lrta'
+game_word = 'sabina'
+incorrect_guesses = 'qzcwr'
+correct_guesses = 'a'
+guessed_letters = 'abcdefgh'
 
 def intro():
     """
@@ -96,13 +97,39 @@ def hidden_answer():
     for letter in dashes:
         print(letter, end=' ')
     print()
-    
+
+def user_guess(guessed_letters):
+    """
+    Takes a users guess and establishes whether it is a
+    single letter or full word guess. 
+    Uses a while loop and if/elif statements to ensure a valid
+    guess is entered.
+    """
+    while True:
+        print('Enter your guess below.')
+        print('Either a single letter or have a go at the whole word')
+        print()
+        guess = input()
+        guess = guess.lower()
+        if len(guess) == 1:
+            if guess in guessed_letters:
+                print(f'You guessed {guess}, you already guessed that. Try again')
+            elif guess not in 'abcdefghijklmnopqrstuvwxyz':
+                print('Only guesses in the alphabet accepted.. Try again')
+            else:
+                return guess
+        elif len(guess) == len(game_word):
+            if guess == game_word:
+                print(f'{guess} is the word! Well done!')
+                break
+            else:
+                print('That was incorrect.. Try again')
+        else:
+            return guess
+
 
 intro()
 get_random_word(GAME_WORDS)
 game_board(game_word, correct_guesses, incorrect_guesses)
 hidden_answer()
-
-
-
-
+user_guess(guessed_letters)
