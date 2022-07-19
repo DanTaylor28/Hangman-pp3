@@ -36,6 +36,9 @@ HANGMAN = ['''
     /|\   |
     / \   |
          === ''']
+game_word = 'brilliant'
+incorrect_guesses = 'qzxc'
+correct_guesses = 'lrta'
 
 def intro():
     """
@@ -75,11 +78,30 @@ def game_board(game_word, correct_guesses, incorrect_guesses):
     the user.
     """
     print(HANGMAN[len(incorrect_guesses)])
-    print(f'Incorrectly guessed letters: {incorrect_guesses}')
+    print(f'Incorrectly guessed letters: {incorrect_guesses}\n')
+
+def hidden_answer():
+    """
+    Display dashes corresponding with the number of letters
+    in the word by iterating through with a for loop. 
+    Updates after each user guess inserting correctly guessed
+    letters obtained from the correct_guesses variable.
+    """
+    dashes = len(game_word) * '-'
+
+    for i, x in enumerate(game_word):
+        if game_word[i] in correct_guesses:
+            dashes = dashes[:i] + game_word[i] + dashes[i+1:]
+
+    for letter in dashes:
+        print(letter, end=' ')
+    print()
     
 
 intro()
 get_random_word(GAME_WORDS)
+game_board(game_word, correct_guesses, incorrect_guesses)
+hidden_answer()
 
 
 
