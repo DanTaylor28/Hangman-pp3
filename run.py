@@ -1,5 +1,41 @@
 import random
-game_words = 'hello goodbye smiling sunny delightful'.split()
+GAME_WORDS = 'hello goodbye smiling sunny delightful'.split()
+HANGMAN = ['''
+    +----+
+         |
+         |
+         |
+        === ''', '''
+    +----+
+    O    |
+         |
+         |
+        === ''', '''
+    +----+
+    O    |
+    |    |
+         |
+        === ''', '''
+    +----+
+    O    |
+   /|    |
+         |
+        === ''', '''
+     +----+
+     O    |
+    /|\   |
+          |
+         === ''', '''
+     +----+
+     O    |
+    /|\   |
+    /     |
+         === ''', '''
+     +----+
+     O    |
+    /|\   |
+    / \   |
+         === ''']
 
 def intro():
     """
@@ -31,8 +67,11 @@ def get_random_word(random_word):
     print(random_word[word])
 
 
+
+
 intro()
-get_random_word(game_words)
+get_random_word(GAME_WORDS)
+print(HANGMAN[0])
 
 
 
