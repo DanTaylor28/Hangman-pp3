@@ -37,6 +37,7 @@ HANGMAN = ['''
     / \   |
          === ''']
 
+
 def intro():
     """
     Prints a welcome message to the terminal and an input
@@ -51,7 +52,8 @@ def intro():
         try:
             name = (str(input('Please enter your name below:\n')))
             if name.isalpha() and len(name) > 1:
-                print(f'Hello {name}, we hope you enjoy playing & best of luck!')
+                print(f'''Hello {name}, we hope you enjoy playing
+                & best of luck!''')
                 break
             else:
                 raise TypeError
@@ -59,34 +61,38 @@ def intro():
                 print('The name you entered is invalid.. Please try again.')
                 continue
 
+
 def get_random_word(random_word):
     """
-    Returns a random word from the list of game words defined above 
+    Returns a random word from the list of game words defined above
     using the random pack imported at the top of the code.
     """
     word = random.randint(0, len(random_word) - 1)
-    return(random_word[word])
+    return random_word[word]
+
 
 def game_board(wrong_guesses):
     """
     Print out the expected animation of hangman to correspond to how many
     incorrect guesses have been made.
-    Also prints out an f string showing the incorrect guesses made by 
+    Also prints out an f string showing the incorrect guesses made by
     the user.
     """
     print(HANGMAN[len(wrong_guesses)])
+    print()
     print(f'Incorrectly guessed letters: {wrong_guesses}\n')
+
 
 def hidden_answer(play_word, right_guesses):
     """
     Display dashes corresponding with the number of letters
-    in the word by iterating through with a for loop. 
+    in the word by iterating through with a for loop.
     Updates after each user guess inserting correctly guessed
     letters obtained from the correct_guesses variable.
     """
     dashes = len(play_word) * '-'
 
-    for i, x in enumerate(game_word):
+    for i, x in enumerate(play_word):
         if play_word[i] in right_guesses:
             dashes = dashes[:i] + play_word[i] + dashes[i+1:]
 
@@ -94,10 +100,11 @@ def hidden_answer(play_word, right_guesses):
         print(letter, end=' ')
     print()
 
+
 def user_guess(guessed_letters):
     """
     Takes a users guess and establishes whether it is a
-    single letter or full word guess. 
+    single letter or full word guess.
     Uses a while loop and if/elif statements to ensure a valid
     guess is entered.
     """
@@ -109,7 +116,8 @@ def user_guess(guessed_letters):
         guess = guess.lower()
         if len(guess) == 1:
             if guess in guessed_letters:
-                print(f'You guessed {guess}, you already guessed that. Try again')
+                print(f'''You guessed {guess}, you already guessed that.
+                Try again''')
             elif guess not in 'abcdefghijklmnopqrstuvwxyz':
                 print('Only guesses in the alphabet accepted.. Try again')
             else:
@@ -120,8 +128,12 @@ def user_guess(guessed_letters):
                 return guess
             else:
                 print('That was incorrect.. Try again')
+        elif len(guess) != len(game_word):
+            print("""Your guess isn't the same length as the game word..
+            Try again""")
         else:
             return guess
+
 
 def replay_game():
     """
@@ -130,56 +142,54 @@ def replay_game():
     is typed in.
     """
     print('Would you like to play again? Yes/No')
-    return input().lower()
+    return input().lower().startswith('y')
 
 
 intro()
 game_word = get_random_word(GAME_WORDS)
-incorrect_guesses = ''
-correct_guesses = ''
-game_over = False
+INCORRECT_GUESSES = ''
+CORRECT_GUESSES = ''
+GAME_OVER = False
 
 while True:
-    game_board(incorrect_guesses)
-    hidden_answer(game_word, correct_guesses)
+    game_board(INCORRECT_GUESSES)
+    hidden_answer(game_word, CORRECT_GUESSES)
 
     # Calling user_guess function to allow the user to make a guess.
-    new_guess = str(user_guess(incorrect_guesses + correct_guesses))
+    NEW_GUESS = str(user_guess(INCORRECT_GUESSES + CORRECT_GUESSES))
 
-    # Assign new value to correct_guesses if the users guess is in the game_word.
-    if new_guess in game_word:
-        correct_guesses = correct_guesses + new_guess
+    # Assign new value to correct_guesses if the users guess
+    # is in the game_word.
+    if NEW_GUESS in game_word:
+        CORRECT_GUESSES = CORRECT_GUESSES + NEW_GUESS
 
         # Checking to see if player has won.
         # Iterate through game_word & compare to letters in correct_guesses.
-        all_letters_guessed = True
-        for i in range(len(game_word)):
-            if game_word[i] not in correct_guesses:
-                all_letters_guessed = False
+        ALL_LETTERS_GUESSED = True
+        for a, b in enumerate(game_word):
+            if game_word[a] not in CORRECT_GUESSES:
+                ALL_LETTERS_GUESSED = False
                 break
-        if all_letters_guessed:
+        if ALL_LETTERS_GUESSED:
             print(f'You Won!! The word was {game_word}')
-            game_over = True
+            GAME_OVER = True
     else:
-        incorrect_guesses = incorrect_guesses + new_guess
+        INCORRECT_GUESSES = INCORRECT_GUESSES + NEW_GUESS
 
         # Code to execute if you've reached maximum amount of guesses.
-        if len(correct_guesses) == len(HANGMAN) - 1:
-            game_board(incorrect_guesses)
-            print(f'You have run out of guesses after {incorrect_guesses} wrong guesses & {correct_guesses} correct guesses')
-            print(f'The word you searching for was {game_word}!')
-            game_over = True
+        if len(INCORRECT_GUESSES) == len(HANGMAN) - 1:
+            game_board(INCORRECT_GUESSES)
+            print(f'''You have run out of guesses after {INCORRECT_GUESSES} wrong guesses &
+            {CORRECT_GUESSES} correct guesses''')
+            print(f'The word you were searching for was {game_word}!')
+            GAME_OVER = True
 
-
-
-    
-
-
-
-
-
-
-
-# game_board(incorrect_guesses)
-# hidden_answer(game_word, correct_guesses)
-# user_guess(guessed_letters)
+    # Code to execute if the user wants to play again
+    if GAME_OVER:
+        if replay_game():
+            game_word = get_random_word(GAME_WORDS)
+            INCORRECT_GUESSES = ''
+            CORRECT_GUESSES = ''
+            GAME_OVER = False
+        else:
+            break
