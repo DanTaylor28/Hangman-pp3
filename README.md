@@ -2,7 +2,11 @@
 
 My game is based upon the common word guessing game in which you have a set number of attempts to guess the correct word, before the man is hung. It was made and runs in the python terminal as well as being deployed through the Code institute mock terminal on Heroku.
 
-The game is aimed towards anybody who enjoys puzzle and word guessing games. To play is very simple, you guess either a letter or the full word and the hyphens are replaced with any letter you guess correctly and the hangman animation corresponds with the amount of incorrect guesses you have made. If the animation runs its full course and the man is hung, then the game ends.
+The game is aimed towards anybody who enjoys puzzle and word guessing games. To play is very simple, you guess either a letter or the full word; if the letter you guess is correct it will replace one of the dash in the correct order of the word, otherwise the hangman animation corresponds with the amount of incorrect guesses you make. If the animation runs its full course and the man is hung, then the game is over and you lose.
+
+-Below is a flowchart I made outlining the steps I needed to take to complete the project before I wrote any code
+
+![flowchart-img](/assets/images/flow-chart-hangman.png)
 * * * 
 
 # Current Features
@@ -13,37 +17,53 @@ The game is aimed towards anybody who enjoys puzzle and word guessing games. To 
 
 - The player is then asked to provide their name, which is validated to ensure it is acceptable. If no name is provided or it contains 1 letter or less, the user is asked to try again and it will continue to do so until a valid name is entered. The request will also be repeated if a non alphabetic symbol is entered eg numbers.
 
+![name-input](/assets/images/name-input.png)
+
 ## Random Word Allocation
 
 - Defined at the top of the code is a list of words, of which the computer will randomly choose one to get assigned to the current game.
 
 - These words can be updated in the code depending on how difficult you want the words to be. You can add as many words as you like to reduce the chances of having any words reappearing. 
 
-- To stop the code looking too cluttered, if adding a substantial amount of words i would like to add these to a seperate file and import them to my run.py file rather than having a very large list at the top of my code.
+- Adding a substantial amount of words might make the code look cluttered, therefore I would like to add these to a seperate file and import them to my run.py file rather than having a very large list at the top of my code.
 
 ## Hangman Animation 
 
-- At the start of the game, the animation of the hangman prints to the console in the first position with no man hanging. This illustrates to the user that they have all 6 guesses remaining.
+- At the start of the game, the animation of the hangman prints to the terminal in the first position with no man hanging. This illustrates to the user that they have all 6 guesses remaining.
 
-- After every guess the user makes, the correct animation corresponding to the number of lives left prints to the terminal, to give the user a visual representation of there progress. I changed the color to a bright yellow to draw attention and to contrast the black background.
+- After every guess the user makes, the correct animation corresponding to the number of lives left prints to the terminal, to give the user a visual representation of there progress (i.e. adding a body part). I changed the color to a bright yellow to draw attention as well as to contrast the black background.
+
+![hangman-animation](/assets/images/hangman-animation.png)
 
 ## Guessed Letters List
 
-- Directly underneath the hangman animation is a guessed letters area. After each unsuccessful guess by the user, the letter used will appear here to remind the player that it has already been guessed.
+- Directly underneath the hangman animation is a guessed letters area. After each unsuccessful guess by the user, the letter will appear here to remind the player which letters have already been guessed.
 
 - I coloured this in red to make it stand out to hopefully prevent the user making alot of mistakes by re-entering already guessed letters.
 
+![hangman-updating](/assets/images/hangman-updating.png)
+![failed-game](/assets/images/failed-game.png)
+![won-game](/assets/images/won-game.png)
+
 ## Hidden Answer Area
 
-- At the start at every game, a number of hyphens are printed to the console which are equal to the amount of letters that the word to guess has.
+- At the start of every game, a number of dashes are printed to the terminal which are equal to the amount of letters in the word to be guessed.
 
-- After each user guess, the individual hyphens will be replaced with a correctly guessed letter from the word and printed to the console along with the hangman animation.
+- After each correct guess, a dash will be replaced with the correctly guessed letter and printed to the terminal along with the hangman animation.
 
 ## Play Again Question
 
 - When a game is over, the user is asked if they would like to play again. You are asked to type either yes or no into the terminal. If any response is given that starts with the letter 'y', the game is restarted and a new word is generated, any other reponse including an empty input will bring the program to a close. 
 
-- The aim of this final question is to encourage users to play again, and if they do, make it as simple as possible to restart a game. It is much faster to type yes than to reload the whole program.
+- The aim of this final question is to encourage users to play again, and if they do, it should be as simple as possible to restart a game. This is because it is much faster to type yes than to reload the whole program.
+
+![play-again-question](/assets/images/play-again-question.png)
+
+## Rate Us Question
+
+- Once you have played and informed the computer you no longer want to play, one final question runs in the terminal. It asks the user to rate the game between 1 and 5. 
+
+- Any answers input which are not between 1-5 raises an error and a print statement to the user. When the player inputs a number, the program comes to a close.
 
 ## Input Validation 
 
@@ -57,19 +77,26 @@ For every input the user makes, if/else and try/except statements are used to ve
 All of the above will print a statement to the terminal describing the error and asking the user to try again.
 * * *
 
+# Libraries Used
+
+- Colorama
+- I downloaded this library as it was important to me to provide the user with an attention seeking layout in the terminal. I believe it really has a postive impact on the game experience and makes it look substantially more appealing than if it was in simple black and white.
+- random
+- The only other import I used was the built in random method, so the computer can generate a word from the list.
+
 # Future Features To Implement
 
 ## Pass & Play
 
-- The ability for two people to play at the same time is a feature i would like to implement. By allowing one player to enter a word of their choice at the start of the game, they could then take turns playing and could score 1 point per round for example.
+- I would like to implement the ability for two people to play at the same time. By allowing one player to enter a word of their choice at the start of the game, they could then take turns playing and could score 1 point per round for example. 
 
 ## Choose Difficulty Level
 
-- I would like to add a large choice of words for the player to guess. This could then allow me to break down the words into easy, medium and hard difficulties giving the player a greater range of words to choose from.
+- I would like to add a larger choice of words for the player to guess. This could then allow me to break down the words into easy, medium and hard difficulties giving the player a greater range of words to choose from.
 
 ## Multiple Word Guesses
 
-- The ability to add multiple word guesses would be a fun feature to implement. I don't think it would be too big of a challenge to add, but i unfortunatelyly did not have time just now.
+- The ability to add multiple word guesses is another feature I would like to implement. I don't think it would be too big of a challenge to add, but I unfortunately did not have time just now.
 * * *
 
 # Testing
@@ -79,7 +106,7 @@ Extensive testing has been carried out throughout the development process using 
 - Passed through the pep8 validator with no issues 
 - Print statements used in development process to ensure individual functions are working as expected.
 - Finished game tested in the python terminal as well as the Code Institute Heroku terminal.
-- I have played through the game and tested out every possible user input. I have ensured invalid inputs are handled effectively with the use of print statements back to the user explaining why the error has been raised.
+- I have played the game throughout and tested every possible user input. I have ensured invalid inputs are handled effectively with the use of print statements back to the user explaining why the error has been raised.
 These invalid inputs include:
 
 - Empty Inputs 
@@ -92,9 +119,9 @@ These invalid inputs include:
 
 ### Fixed Bugs
 
-- While testing the game, I discovered that if the user made a guess longer than the correct word an IndexError would arise in the terminal. If the guess was shorter, it would still accept that and update the hidden answer hyphen area with the letters. I fixed this by adding an additional elif statement in the user_guess function. If the length of the user guess is not the same as the correct answer, a statement explaining the error will now be printed to the user.
+- While testing the game, I discovered that if the user made a guess longer than the correct word an IndexError would appear in the terminal. If the guess was shorter than the actual word, it would still accept the answer and update the letters to the dashes. I fixed this by adding an additional elif statement in the user_guess function. If the length of the user guess is not the same as the correct answer, a statement explaining the error will now be printed to the user.
 
-- In a few instances throughout my code, i had warnings suggesting I use enumerate where I had originally used range(len). I researched and refreshed my knowledge of enumerate and replaced the code with the suggested.
+- In a few instances throughout my code, I had warnings suggesting I use enumerate where I had originally used range(len). I researched and refreshed my knowledge of enumerate and replaced the code with the suggested.
 
 - When I first ran the pep8 testing I had five errors returned. Three of these were due to empty blank spaces appearing and the last two were lines of code that were too long. I fixed the long lines by breaking them down into smaller print statements.
 

@@ -17,7 +17,12 @@ def print_with_color(s, color=Fore.WHITE, brightness=Style.NORMAL, **kwargs):
     print(f"{brightness}{color}{s}{Style.RESET_ALL}", **kwargs)
 
 
-GAME_WORDS = 'hello'.split()
+# List of words randomly generated to be guessed by user
+GAME_WORDS = '''because satisfied without modest
+include student grandchild anger purpose belongings commit delegate
+determined powerful secret appliance application return confront
+seeking daughter community experience thought future compassion
+nutrition balance anybody someone spiritual various'''.split()
 HANGMAN = ['''
     +----+
          |
@@ -76,10 +81,9 @@ def intro():
                 print(f'Hello {name}, we hope you enjoy playing\n')
                 print('Best of Luck!')
                 break
-            else:
-                raise TypeError
+            raise TypeError
         except TypeError:
-            print('The name you entered is invalid.. Please try again.')
+            print('The name you entered is invalid.. Letters only')
             continue
 
 
@@ -212,6 +216,7 @@ while True:
             GAME_OVER = True
 
     # Code to execute if the user wants to play again
+
     if GAME_OVER:
         if replay_game():
             game_word = get_random_word(GAME_WORDS)
@@ -219,4 +224,17 @@ while True:
             CORRECT_GUESSES = ''
             GAME_OVER = False
         else:
+            # Final question to user asking to rate game
+            while True:
+                try:
+                    print('Before you go.. Quick question?\n')
+                    FEEDBACK = int(input('What do you rate us? 1-5?\n'))
+                    if FEEDBACK > 0 and FEEDBACK < 6:
+                        print('Thanks for the feedback!')
+                        print('Have a great day!')
+                        break
+                    raise ValueError
+                except ValueError:
+                    print('Only ratings between 1 and 5 are accepted\n')
+                continue
             break
