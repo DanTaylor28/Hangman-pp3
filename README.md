@@ -122,6 +122,9 @@ The steps below outline the deployment process:
 - Click the deploy section from the navigation bar at the top. On the deployment method section, click 'connect to Github'.
 - Enter the repository name which you called the project exactly as it is in github and click search. Press the connect button to link it to Heroku.
 - Scroll down and click the 'deploy branch' button. You will get notified that the app has been deployed successfully, along with a button which can be used to view the app.
+
+The live link to the site can be found at -
+
 * * *
 
 # Credits

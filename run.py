@@ -1,11 +1,16 @@
-from colorama import init, Fore, Back, Style
 import random
+from colorama import Fore, Back, Style
 
-FORES = [Fore.BLACK, Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.MAGENTA, Fore.CYAN, Fore.WHITE]
-BACKS = [Back.BLACK, Back.RED, Back.GREEN, Back.YELLOW, Back.BLUE, Back.MAGENTA, Back.CYAN, Back.WHITE]
+
+# The folowing code is from thepythoncode.com
+FORES = ([Fore.BLACK, Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE,
+         Fore.MAGENTA, Fore.CYAN, Fore.WHITE])
+BACKS = ([Back.BLACK, Back.RED, Back.GREEN, Back.YELLOW, Back.BLUE,
+         Back.MAGENTA, Back.CYAN, Back.WHITE])
 BRIGHTNESS = [Style.DIM, Style.NORMAL, Style.BRIGHT]
 
 
+# The folowing code is from thepythoncode.com
 def print_with_color(s, color=Fore.WHITE, brightness=Style.NORMAL, **kwargs):
     """Utility function wrapping the regular `print()` function
     but with colors and brightness"""
@@ -65,14 +70,14 @@ def intro():
         try:
             name = (str(input('Please enter your name below:\n')))
             if name.isalpha() and len(name) > 1:
-                print(f'''Hello {name}, we hope you enjoy playing
-                & best of luck!''')
+                print(f'Hello {name}, we hope you enjoy playing\n')
+                print('Best of Luck!')
                 break
             else:
                 raise TypeError
-        except TypeError as e:
-                print('The name you entered is invalid.. Please try again.')
-                continue
+        except TypeError:
+            print('The name you entered is invalid.. Please try again.')
+            continue
 
 
 def get_random_word(random_word):
@@ -93,7 +98,7 @@ def game_board(wrong_guesses):
     """
     print_with_color(HANGMAN[len(wrong_guesses)], color=Fore.YELLOW)
     print()
-    print_with_color(f'Guessed letters: {wrong_guesses}\n', color=Fore.RED)
+    print_with_color(f'Guessed letters: {wrong_guesses}\n', color=Fore.YELLOW)
 
 
 def hidden_answer(play_word, right_guesses):
@@ -129,8 +134,8 @@ def user_guess(guessed_letters):
         guess = guess.lower()
         if len(guess) == 1:
             if guess in guessed_letters:
-                print(f'''You guessed {guess}, you already guessed that.
-                Try again''')
+                print(f"\nYou've already tried {guess} ..")
+                print('Pick another letter\n')
             elif guess not in 'abcdefghijklmnopqrstuvwxyz':
                 print('Only guesses in the alphabet accepted.. Try again')
             else:
@@ -143,8 +148,8 @@ def user_guess(guessed_letters):
             else:
                 print_with_color('That was wrong.. Try again', color=Fore.RED)
         elif len(guess) != len(game_word):
-            print("""Your guess isn't the same length as the game word..
-            Try again""")
+            print("Your guess isn't the same length as the word.. ")
+            print('Try again\n')
         else:
             return guess
 
@@ -196,11 +201,11 @@ while True:
         # Code to execute if you've reached maximum amount of guesses.
         if len(INCORRECT_GUESSES) == len(HANGMAN) - 1:
             game_board(INCORRECT_GUESSES)
-            print_with_color(f'''You have run out of guesses after {INCORRECT_GUESSES} wrong guesses &
-            {CORRECT_GUESSES} correct guesses''', color=Fore.RED)
+            print_with_color("Aww! You're out of guesses..\n", color=Fore.RED)
+            print_with_color("THE MAN IS HUNG!!", color=Fore.RED)
             print()
             print('The word you were searching for was', end=' ')
-            print_with_color(f'{game_word}!', color=Fore.GREEN)
+            print_with_color(f'{game_word}!\n', color=Fore.GREEN)
             GAME_OVER = True
 
     # Code to execute if the user wants to play again
