@@ -36,10 +36,6 @@ HANGMAN = ['''
     /|\   |
     / \   |
          === ''']
-game_word = 'sabina'
-incorrect_guesses = 'qzcwr'
-correct_guesses = 'a'
-guessed_letters = 'abcdefgh'
 
 def intro():
     """
@@ -68,10 +64,10 @@ def get_random_word(random_word):
     Returns a random word from the list of game words defined above 
     using the random pack imported at the top of the code.
     """
-    word = random.randint(0, len(random_word) -1)
+    word = random.randint(0, len(random_word) - 1)
     print(random_word[word])
 
-def game_board(game_word, correct_guesses, incorrect_guesses):
+def game_board(incorrect_guesses):
     """
     Print out the expected animation of hangman to correspond to how many
     incorrect guesses have been made.
@@ -81,7 +77,7 @@ def game_board(game_word, correct_guesses, incorrect_guesses):
     print(HANGMAN[len(incorrect_guesses)])
     print(f'Incorrectly guessed letters: {incorrect_guesses}\n')
 
-def hidden_answer():
+def hidden_answer(game_word, correct_guesses):
     """
     Display dashes corresponding with the number of letters
     in the word by iterating through with a for loop. 
@@ -98,7 +94,7 @@ def hidden_answer():
         print(letter, end=' ')
     print()
 
-def user_guess(guessed_letters):
+def user_guess(guessed_letters, game_word):
     """
     Takes a users guess and establishes whether it is a
     single letter or full word guess. 
@@ -117,7 +113,7 @@ def user_guess(guessed_letters):
             elif guess not in 'abcdefghijklmnopqrstuvwxyz':
                 print('Only guesses in the alphabet accepted.. Try again')
             else:
-                return guess
+                break
         elif len(guess) == len(game_word):
             if guess == game_word:
                 print(f'{guess} is the word! Well done!')
@@ -127,9 +123,18 @@ def user_guess(guessed_letters):
         else:
             return guess
 
+def replay_game():
+    """
+    Display question to the user asking if they would like
+    to play again followed by an input where either yes or no
+    is typed in.
+    """
+    print('Would you like to play again? Yes/No')
+    return input().lower()
 
-intro()
-get_random_word(GAME_WORDS)
-game_board(game_word, correct_guesses, incorrect_guesses)
-hidden_answer()
-user_guess(guessed_letters)
+
+# intro()
+# get_random_word(GAME_WORDS)
+# game_board(game_word, correct_guesses, incorrect_guesses)
+# hidden_answer()
+# user_guess(guessed_letters)
