@@ -150,7 +150,7 @@ The steps below outline the deployment process:
 - Enter the repository name which you called the project exactly as it is in github and click search. Press the connect button to link it to Heroku.
 - Scroll down and click the 'deploy branch' button. You will get notified that the app has been deployed successfully, along with a button which can be used to view the app.
 
-The live link to the site can be found at -
+The live link to the site can be found at - https://hangman-game28.herokuapp.com/
 
 * * *
 
