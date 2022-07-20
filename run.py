@@ -133,8 +133,44 @@ def replay_game():
     return input().lower()
 
 
-# intro()
-# get_random_word(GAME_WORDS)
-# game_board(game_word, correct_guesses, incorrect_guesses)
-# hidden_answer()
+intro()
+game_word = get_random_word(GAME_WORDS)
+incorrect_guesses = ''
+correct_guesses = ''
+game_over = False
+
+while True:
+    game_board(incorrect_guesses)
+    hidden_answer(game_word, correct_guesses)
+
+    #Calling user_guess function to allow the user to make a guess.
+    new_guess = str(user_guess(incorrect_guesses + correct_guesses))
+
+    #Assign new value to correct_guesses if the users guess is in the game_word.
+    if new_guess in game_word:
+        correct_guesses = correct_guesses + new_guess
+
+        #Checking to see if player has won.
+        #Iterate through game_word & compare to letters in correct_guesses.
+        all_letters_guessed = True
+        for i in range(len(game_word)):
+            if game_word[i] not in correct_guesses:
+                all_letters_guessed = False
+                break
+        if all_letters_guessed:
+            print(f'You Won!! The word was {game_word}')
+            game_over = True
+        else:
+            incorrect_guesses = incorrect_guesses + new_guess
+            
+    
+
+
+
+
+
+
+
+# game_board(incorrect_guesses)
+# hidden_answer(game_word, correct_guesses)
 # user_guess(guessed_letters)
