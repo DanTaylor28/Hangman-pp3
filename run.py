@@ -63,12 +63,15 @@ def intro():
     or an input less than 2 letters raises an error
     which is handled by a try/except statement.
     """
-    print('Welcome to Hangman! Guess the correct word before you are hung!')
-    print('Guess 1 letter at a time or the full word if you feel confident.')
+    print()
+    print_with_color('W E L C O M E  T O  H A N G M A N\n', color=Fore.YELLOW)
+    print_with_color('FIND THE WORD BEFORE YOU ARE HUNG!\n', color=Fore.YELLOW)
+    print_with_color('GUESS 1 LETTER AT A TIME', color=Fore.YELLOW)
+    print_with_color("OR THE FULL WORD IF YOU'RE CONFIDENT", color=Fore.YELLOW)
 
     while True:
         try:
-            name = (str(input('Please enter your name below:\n')))
+            name = (str(input('\nEnter your name below:\n')))
             if name.isalpha() and len(name) > 1:
                 print(f'Hello {name}, we hope you enjoy playing\n')
                 print('Best of Luck!')
@@ -98,7 +101,7 @@ def game_board(wrong_guesses):
     """
     print_with_color(HANGMAN[len(wrong_guesses)], color=Fore.YELLOW)
     print()
-    print_with_color(f'Guessed letters: {wrong_guesses}\n', color=Fore.YELLOW)
+    print_with_color(f'Guessed letters: {wrong_guesses} \n', color=Fore.YELLOW)
 
 
 def hidden_answer(play_word, right_guesses):
@@ -142,7 +145,7 @@ def user_guess(guessed_letters):
                 return guess
         elif len(guess) == len(game_word):
             if guess == game_word:
-                print_with_color('You guessed it!', color=Fore.GREEN)
+                print_with_color('YOU GUESSED IT!', color=Fore.GREEN)
                 print()
                 return guess
             else:
@@ -192,7 +195,7 @@ while True:
                 ALL_LETTERS_GUESSED = False
                 break
         if ALL_LETTERS_GUESSED:
-            print_with_color('Congrats you won!!', color=Fore.GREEN)
+            print_with_color('CONGRATS YOU WON!!\n', color=Fore.GREEN)
             print_with_color(f'The word was {game_word}\n', color=Fore.GREEN)
             GAME_OVER = True
     else:
@@ -201,7 +204,7 @@ while True:
         # Code to execute if you've reached maximum amount of guesses.
         if len(INCORRECT_GUESSES) == len(HANGMAN) - 1:
             game_board(INCORRECT_GUESSES)
-            print_with_color("Aww! You're out of guesses..\n", color=Fore.RED)
+            print_with_color("AWW! YOU'RE OUT OF GUESSES..\n", color=Fore.RED)
             print_with_color("THE MAN IS HUNG!!", color=Fore.RED)
             print()
             print('The word you were searching for was', end=' ')
